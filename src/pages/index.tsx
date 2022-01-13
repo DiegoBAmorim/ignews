@@ -1,4 +1,4 @@
-import {GetServerSideProps} from 'next'
+import {GetStaticProps} from 'next'
 import Head from 'next/head'
 import { SubscribeButton } from '../components/SubscribeButton'
 import { stripe } from '../services/stripe'
@@ -33,8 +33,10 @@ export default function Home({product} : HomeProps) {
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async() => {
-  //roda o servidor node nele, ou seja esta na camada de ssr
+export const getStaticProps: GetStaticProps = async() => {
+  //roda o servidor node nele, ou seja esta na camada de ssr isso usando getServiceSideProps 
+
+  //ja o getStaticProps utiliza o conceito de SSG(Static Site Generation) que verifica se a tela mudou que foi salva de forma estatica.
   const price = await stripe.prices.retrieve('price_1KHHheIAcbXCMFgW6MT7AQBh')
 
   const product = {
@@ -47,6 +49,7 @@ export const getServerSideProps: GetServerSideProps = async() => {
   return{
     props: {
       product,
-    }
+    },
+    revalidate: 60 * 60 * 24 // 24 horas //quanto tempo em segundos eu quero q essa pagina se mantenha sem ser revalidada, ou seja reconstruida
   }
 }
