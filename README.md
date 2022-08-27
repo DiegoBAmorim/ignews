@@ -64,11 +64,9 @@ As seguintes tecnologias foram utilizadas no projeto:
 
 ```bash
 # Clone this project
-$ git clone https://github.com/khalleb/ignews
-# Access
-$ cd ignews
+$ git clone https://github.com/DiegoBAmorim/ignews.git 
 # Install dependencies
-$ yarn install
+$ yarn
 # Run the project
 $ yarn dev
 # The server will initialize in the <http://localhost:3000>
